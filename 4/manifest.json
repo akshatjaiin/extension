@@ -1,0 +1,18 @@
+{
+    "manifest_version": 3,
+    "name": "Summarize Extension",
+    "version": "1.0",
+    "description": "Summarize, translate, and take notes on webpage content.",
+    "permissions": ["scripting", "activeTab", "storage"],
+    "host_permissions": ["<all_urls>"],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "action": {
+      "default_popup": "popup/popup.html",
+      "default_icon": {
+        "16": "assets/icon.png"
+      }
+    }
+  }
+  
