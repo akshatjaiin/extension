@@ -16,7 +16,7 @@ async function initChat() {
   }
 }
 
-// Send a message to the AI and get a responsegit
+// Send a message to the AI and get a response
 async function sendMessage(userMessage) {
   // Check if the session exists and is properly initialized
   if (!session) {
@@ -35,6 +35,7 @@ async function sendMessage(userMessage) {
     // Delay AI response to make the chat feel more natural
     setTimeout(() => {
       displayAIResponse(aiResponse);
+      speakAndAnimate(aiResponse); // Add AI voice output
     }, 500); // Delay for 500ms before displaying AI response
     
     scrollToBottom();  // Scroll chat history to the bottom after a new message is added
@@ -135,3 +136,33 @@ document.getElementById("chatInput").addEventListener("keypress", (e) => {
 
 // Initialize chat session when the page loads
 window.addEventListener("load", initChat);
+
+// Live2D Integration
+window.PIXI = PIXI;
+
+(async function () {
+    const app = new PIXI.Application({
+        view: document.getElementById('live2d'),
+    });
+
+    // Load the Live2D model
+    const model = await Live2DModel.from("/hiyori_free_en/runtime/hiyori_free_t08.model3.json");
+    app.stage.addChild(model);
+
+    // Set model transforms
+    model.x = 100;
+    model.y = 100;
+    model.rotation = Math.PI;
+    model.skew.x = Math.PI;
+    model.scale.set(2, 2);
+    model.anchor.set(0.5, 0.5);
+})();
+
+// Speech Synthesis for AI voice
+function speakAndAnimate(text){
+    const speechSynthesis = window.speechSynthesis;
+    const aiVoice = new SpeechSynthesisUtterance(text);
+    aiVoice.voice = speechSynthesis.getVoices()[0]; // Use default voice
+    aiVoice.rate = 1;  // Normal speech rate
+    speechSynthesis.speak(aiVoice);
+}

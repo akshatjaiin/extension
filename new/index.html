@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="static/media/css/styles.css">
 </head>
 <body>
-
     <!-- Chat UI Container -->
     <div id="page">
         <div id="top-section">
@@ -56,5 +55,24 @@
         });
     </script>
 
+    <!-- AI interaction with Live2D (Optional Integration) -->
+    <div style="display: flex; justify-content: center; align-items: center; position: top;">
+        <canvas id="live2d" width="800" height="1600" style="height: 100vh;"></canvas>
+    </div>
+
+    <form id="ai_prompt_form">
+        <label for="ai_prompt">Prompt</label>
+        <input type="text" placeholder="Prompt" name="ai_prompt">
+    </form> 
+
+    <script src="https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/dylanNew/live2d/webgl/Live2D/lib/live2d.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pixi.js@7.x/dist/pixi.min.js"></script>
+    
+    <!-- If support for Cubism 2.1 and 4 -->
+    <script src="https://cdn.jsdelivr.net/gh/RaSan147/pixi-live2d-display@v0.5.0-ls-6/dist/cubism4.min.js"></script>
+
+    <!-- Custom JS for AI interaction -->
+    <script src="./static/js/main.js"></script>
 </body>
 </html>
