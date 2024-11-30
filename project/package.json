@@ -1,0 +1,27 @@
+{
+  "name": "project",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.4.1"
+  },
+  "dependencies": {
+    "@nlpjs/core": "^4.23.4",
+    "@nlpjs/lang-en": "^4.23.4",
+    "@nlpjs/lang-id": "^4.23.4",
+    "@nlpjs/lang-ja": "^4.24.0",
+    "@nlpjs/nlp": "^4.23.5",
+    "@pixi/app": "^6.5",
+    "@pixi/core": "^6.5",
+    "@pixi/interaction": "^6.5",
+    "@pixi/ticker": "^6.5",
+    "pixi-live2d-display": "^0.4.0",
+    "ts-node": "^10.9.1"
+  }
+}
