@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime</title>
+    <link rel="icon" type="image/x-icon" href="static/media/settings-icon.png">
+    
+</head>
+<body>
+ <script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/live2d.min.js"></script>
+    <canvas id="live2d" width="800" height="1600"></canvas>
+    <div id="page">
+        <div id="right">
+            checking the server
+            <!-- our waifu on right -->
+        </div>
+        <div id="left">
+            <!-- window to chat on left -->
+        </div>
+    </div>
+
+<script>
+window.addEventListener("load", () => {
+        // https://github.com/evrstr/live2d-widget-models
+        loadlive2d(
+          "live2d",
+          `https://raw.githubusercontent.com/akshatjaiin/hiyori_free_en/refs/heads/main/runtime/hiyori_free_t08.model3.json`,
+          null
+        );
+      });
+</script>
+</body>
+</html>

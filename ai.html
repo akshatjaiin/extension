@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Blog Post Reviews</title>
+<style>
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.positive {
+  background-color: green;
+  border-radius: 50%;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+}
+
+.negative {
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+}
+</style>
+</head>
+<body>
+
+<h2>Review <button id="analyzeButton">Analyze Sentiment</button></h2>
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Datetime</th>
+      <th>Review Text</th>
+      <th>User Email</th>
+      <th>Status</th>
+      <th>Sentiment</th>
+    </tr>
+  </thead>
+  <tbody id="reviewTableBody">
+    <!-- Sample data will be inserted here by JavaScript -->
+  </tbody>
+</table>
+
+<script>
+  const today = new Date().toISOString().slice(0, 10);
+
+  const reviews = [
+    { id: 1, datetime: today, review_text: "This article provided a fresh perspective on the topic. I especially enjoyed the in-depth analysis and the use of real-world examples. However, I felt the conclusion was a bit rushed and could have benefited from further elaboration.", user_email: "user1@example.com", status: "New" },
+    { id: 2, datetime: today, review_text: "Very informative and well-researched. The author clearly knows their stuff. My only criticism would be that the article was a bit too technical at times, which might alienate some readers.", user_email: "user2@example.com", status: "New" },
+    { id: 3, datetime: today, review_text: "I found this article to be poorly written and difficult to follow. The arguments were weak and not well-supported. I was hoping for a more insightful analysis.", user_email: "user3@example.com", status: "New" },
+    { id: 4, datetime: today, review_text: "Well-written and engaging, this article kept me hooked from beginning to end. The author presented a compelling case and backed it up with solid evidence. Highly recommended!", user_email: "user4@example.com", status: "New" },
+    { id: 5, datetime: today, review_text: "I was disappointed with this article. It lacked depth and originality. The author seemed to be rehashing old ideas without adding anything new to the conversation.", user_email: "user6@example.com", status: "New" },
+    { id: 6, datetime: today, review_text: "This article was an eye-opener! I had never considered the topic from this angle before. The author's insights were both thought-provoking and informative.", user_email: "user7@example.com", status: "New" },
+    { id: 7, datetime: today, review_text: "I found this article to be biased and one-sided. The author presented a very narrow view of the issue without acknowledging alternative perspectives.", user_email: "user8@example.com", status: "New" },
+    { id: 8, datetime: today, review_text: "Overall, I enjoyed this article. It was well-written and informative. However, I felt that the author could have provided more context and background information for readers who are unfamiliar with the topic.", user_email: "user9@example.com", status: "New" },
+    { id: 9, datetime: today, review_text: "This article was a breath of fresh air. The author's writing style is engaging and accessible. I would love to read more from this author in the future.", user_email: "user10@example.com", status: "New" }
+  ];
+
+  const tableBody = document.getElementById("reviewTableBody");
+  const analyzeButton = document.getElementById("analyzeButton");
+  
+  let s; // Declare 's' in a wider scope
+
+  async function analyzeSentiment(reviewText) {
+      console.log("Analyzing sentiment for:", reviewText);
+      const response = await s.prompt("Analyze the review for sentiment and identify in a list what was liked and disliked." + reviewText);
+      return response.trim(); // Trim any extra whitespace
+    }
+
+   function displayReviews() {
+    tableBody.innerHTML = ""; // Clear existing rows
+
+    reviews.forEach(review => {
+      const row = tableBody.insertRow();
+      row.insertCell().textContent = review.id;
+      row.insertCell().textContent = review.datetime;
+      row.insertCell().textContent = review.review_text;
+      row.insertCell().textContent = review.user_email;
+      row.insertCell().textContent = review.status;
+
+      const sentimentCell = row.insertCell();
+      if (review.sentiment) { // Add sentiment if it's been analyzed
+          sentimentCell.textContent = review.sentiment;
+      }
+    });
+  }
+
+    analyzeButton.addEventListener("click", async () => {
+      for (const review of reviews) {
+        review.sentiment = await analyzeSentiment(review.review_text);
+      }
+      displayReviews();
+    });
+
+    // Immediately Invoked Function Expression (IIFE) to initialize 's'
+    (async () => {
+        s = await ai.languageModel.create({
+            systemPrompt: "You are an expert reviewer of comments who analysis and identifies what attributes were liked or disliked in the review."
+        });
+
+        // Initial display of reviews (can be moved outside the IIFE if needed)
+        displayReviews();
+        })(); 
+    </script>
+
+</script>
+
+</body>
+</html>
