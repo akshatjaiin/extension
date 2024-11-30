@@ -69,7 +69,6 @@ const voice = helpers.getURLParam("voice");
 
 //add key 
 
-
 const usawServerURL = helpers.getURLParam("usaws");
 const AIPossible = openAIKey != null || usawServerURL != null;
 if (!AIPossible) {
