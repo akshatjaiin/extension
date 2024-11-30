@@ -41,6 +41,7 @@
 
     <!-- External JS -->
     <script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/live2d.min.js"></script>
+    <script src="https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js"></script> 
     <script src="https://cdn.jsdelivr.net/npm/pixi.js@6.5.2/dist/browser/pixi.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display/dist/index.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -50,8 +51,14 @@
 
     <script>
         window.addEventListener("load", () => {
-            // Load the Live2D model
-            loadlive2d("live2d", "https://cdn.jsdelivr.net/gh/evrstr/live2d-widget-models/live2d_evrstr/haru_seifuku/model.json", null);
+            loadlive2d("live2d", "https://cdn.jsdelivr.net/gh/evrstr/live2d-widget-models/live2d_evrstr/haru_seifuku/model.json", null)
+            .then(() => {
+                console.log("Model loaded successfully");
+                // Initialize any interactions or event listeners here
+            })
+            .catch((error) => {
+                console.error("Error loading model:", error);
+            });
         });
     </script>
 
@@ -74,5 +81,6 @@
 
     <!-- Custom JS for AI interaction -->
     <script src="./static/js/main.js"></script>
+    <script src="./static/js/mouth.js"></script> 
 </body>
 </html>
