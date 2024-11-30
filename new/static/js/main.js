@@ -114,7 +114,7 @@ function fadeIn(element) {
     } else {
       clearInterval(fadeInterval);
     }
-  }, 30);
+  }, 90);
 }
 
 // Scroll chat history to the bottom after a new message is added
@@ -135,34 +135,24 @@ document.getElementById("chatInput").addEventListener("keypress", (e) => {
 });
 
 // Initialize chat session when the page loads
-window.addEventListener("load", initChat);
+window.addEventListener("load", () => {
+  initChat();
+  loadLive2DModel();
+});
 
 // Live2D Integration
 window.PIXI = PIXI;
 
-(async function () {
-    const app = new PIXI.Application({
-        view: document.getElementById('live2d'),
-    });
+async function loadLive2DModel() {
+  
+  
+}
 
-    // Load the Live2D model
-    const model = await Live2DModel.from("/hiyori_free_en/runtime/hiyori_free_t08.model3.json");
-    app.stage.addChild(model);
-
-    // Set model transforms
-    model.x = 100;
-    model.y = 100;
-    model.rotation = Math.PI;
-    model.skew.x = Math.PI;
-    model.scale.set(2, 2);
-    model.anchor.set(0.5, 0.5);
-})();
-
-// Speech Synthesis for AI voice
-function speakAndAnimate(text){
-    const speechSynthesis = window.speechSynthesis;
-    const aiVoice = new SpeechSynthesisUtterance(text);
-    aiVoice.voice = speechSynthesis.getVoices()[0]; // Use default voice
-    aiVoice.rate = 1;  // Normal speech rate
-    speechSynthesis.speak(aiVoice);
+// Speech synthesis for AI voice
+function speakAndAnimate(text) {
+  const speechSynthesis = window.speechSynthesis;
+  const aiVoice = new SpeechSynthesisUtterance(text);
+  aiVoice.voice = speechSynthesis.getVoices()[0]; // Use default voice
+  aiVoice.rate = 1;  // Normal speech rate
+  speechSynthesis.speak(aiVoice);
 }

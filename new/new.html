@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Interactive Waifu</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="static/media/settings-icon.png">
+
+    <!-- External stylesheets and fonts (optional) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="static/media/css/styles.css">
+</head>
+<body>
+
+    <!-- Live2D Model -->
+    <div id="waifu-container" style="display:flex;justify-content:center;align-items:center;">
+        <canvas id="live2d" width="800" height="1600" style="height: 100vh;"></canvas>
+    </div>
+
+    <!-- Chat UI -->
+    <div id="chat-container">
+        <h2>Chat with Waifu</h2>
+        <div class="chat-box" id="chatBox"></div>
+        <input type="text" id="chatInput" placeholder="Type a message..." />
+    </div>
+
+    <!-- External JS -->
+    <script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/live2d.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pixi.js@6.5.2/dist/browser/pixi.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display/dist/index.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <!-- Custom JS -->
+    <script type="module">
+        window.addEventListener("load", () => {
+            // Initialize chat session
+            initChat();
+
+            // Initialize Live2D model
+            loadLive2DModel();
+        });
+
+        // Initialize chat session with AI
+        async function initChat() {
+            try {
+                // Placeholder for your AI model initialization code
+                console.log("Chat session initialized.");
+            } catch (error) {
+                console.error("Error initializing chat:", error);
+            }
+        }
+
+        // Load and display the Live2D model
+        async function loadLive2DModel() {
+            try {
+                const app = new PIXI.Application({
+                    view: document.getElementById('live2d'),
+                });
+
+                // Load the Live2D model (ensure the path is correct)
+                const model = await Live2DModel.from("https://cdn.jsdelivr.net/gh/evrstr/live2d-widget-models/live2d_evrstr/haru_seifuku/model.json");
+                app.stage.addChild(model);
+
+                // Set model transformations
+                model.x = 100;
+                model.y = 100;
+                model.rotation = Math.PI;
+                model.skew.x = Math.PI;
+                model.scale.set(2, 2);
+                model.anchor.set(0.5, 0.5);
+
+                console.log("Live2D model loaded.");
+            } catch (error) {
+                console.error("Error loading Live2D model:", error);
+            }
+        }
+
+        // Speech synthesis for AI responses
+        function speakAndAnimate(text) {
+            const speechSynthesis = window.speechSynthesis;
+            const aiVoice = new SpeechSynthesisUtterance(text);
+            aiVoice.voice = speechSynthesis.getVoices()[0];  // Use default voice
+            aiVoice.rate = 1;  // Normal speech rate
+            speechSynthesis.speak(aiVoice);
+        }
+
+        // Event listener for chat input
+        document.getElementById("chatInput").addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+                const userMessage = e.target.value.trim();
+                if (userMessage) {
+                    sendMessage(userMessage);
+                    e.target.value = ""; // Clear input field after sending message
+                }
+            }
+        });
+
+        // Simulate sending a message and get AI response
+        async function sendMessage(userMessage) {
+            console.log("User: ", userMessage);
+
+            // Placeholder for sending user message to the AI model and getting response
+            const aiResponse = "Hello, how can I assist you today?"; // AI's placeholder response
+
+            // Display user message
+            displayUserMessage(userMessage);
+
+            // Delay AI response to simulate a real-time response
+            setTimeout(() => {
+                displayAIResponse(aiResponse);
+                speakAndAnimate(aiResponse); // Make the AI speak its response
+            }, 500);
+        }
+
+        // Display user message in chat box
+        function displayUserMessage(message) {
+            const chatBox = document.getElementById("chatBox");
+            const userMessageElement = document.createElement("div");
+            userMessageElement.textContent = `You: ${message}`;
+            chatBox.appendChild(userMessageElement);
+        }
+
+        // Display AI response in chat box
+        function displayAIResponse(message) {
+            const chatBox = document.getElementById("chatBox");
+            const aiMessageElement = document.createElement("div");
+            aiMessageElement.textContent = `Waifu: ${message}`;
+            chatBox.appendChild(aiMessageElement);
+        }
+    </script>
+
+</body>
+</html>
