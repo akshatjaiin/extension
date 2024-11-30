@@ -1,0 +1,30 @@
+{
+  "name": "waifu-otw",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "ts-node ./src/nlp/train.ts; tsc && vite build",
+    "preview": "vite preview",
+    "train": "ts-node ./src/nlp/train.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.9",
+    "typescript": "^4.6.4",
+    "vite": "^3.2.8"
+  },
+  "dependencies": {
+    "@nlpjs/core": "^4.23.4",
+    "@nlpjs/lang-en": "^4.23.4",
+    "@nlpjs/lang-id": "^4.23.4",
+    "@nlpjs/lang-ja": "^4.24.0",
+    "@nlpjs/nlp": "^4.23.5",
+    "@pixi/app": "^6.5",
+    "@pixi/core": "^6.5",
+    "@pixi/interaction": "^6.5",
+    "@pixi/ticker": "^6.5",
+    "pixi-live2d-display": "^0.4.0",
+    "ts-node": "^10.9.1"
+  }
+}
