@@ -4,27 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Extension</title>
-    <link rel="icon" type="image/x-icon" href="static/media/settings-icon.png">
+    <link rel="icon" type="image/x-icon" href="/settings-icon.png">
     
 </head>
 <body>
-    <div id="page">
-        <div id="right">
-            <!-- our waifu on right -->
-        </div>
-        <div id="left">
-            <!-- window to chat on left -->
-        </div>
+    <div style="display:flex;justify-content:center;align-items:center;position:top;">
+    <canvas id="live2d" width="800" height="1600" style="height: 100vh;"></canvas>
     </div>
-
-
-
-    
+    <form id="ai_prompt_form">
+        <label for="ai_prompt">Prompt</label>
+        <input type="text" placeholder="prompt" name="ai_prompt">
+    </form> 
+    </div>
     <script src="https://cubism.live2d.com/sdk-web/cubismcore/live2dcubismcore.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/dylanNew/live2d/webgl/Live2D/lib/live2d.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/pixi.js@6.5.2/dist/browser/pixi.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/pixi-live2d-display/dist/index.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script type="module" src="static/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/pixi.js@7.x/dist/pixi.min.js"></script>
+    
+    <!-- if support for both Cubism 2.1 and 4 -->
+    <!-- <script src="https://cdn.jsdelivr.net/gh/RaSan147/pixi-live2d-display@v0.5.0-ls-6/dist/index.min.js"></script> -->
+    
+    <!-- if only Cubism 2.1 support-->
+    <!-- <script src="https://cdn.jsdelivr.net/gh/RaSan147/pixi-live2d-display@v0.5.0-ls-6/dist/cubism2.min.js"></script> -->
+    
+    <!-- if only Cubism 4 support-->
+    <script src="https://cdn.jsdelivr.net/gh/RaSan147/pixi-live2d-display@v0.5.0-ls-6/dist/cubism4.min.js"></script>
+
+    <script src="./static/js/main.js"></script>
 </body>
 </html>
