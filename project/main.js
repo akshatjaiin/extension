@@ -16,7 +16,7 @@ const app = new Application({
   view: canvas,
 });
 
-const model = await Live2DModel.from('/model/shizuku.model.json', {
+const model = await Live2DModel.from('/hiyori_free_en/runtime/hiyori_free_t08.model3.json', {
   autoInteract: false,
   motionPreload: MotionPreloadStrategy.IDLE
 });
@@ -90,12 +90,8 @@ function fitModel() {
 
   canvas.width = window.innerWidth / 2;
   canvas.height = window.innerHeight;
-
-
-  if (!breakpoint.md && !breakpoint.lg) {
-    app.renderer.screen.width = window.innerWidth;
-  }
   app.renderer.screen.width = window.innerWidth / 2;
+  app.renderer.screen.height = window.innerHeight;
 
   const anchor = {
     x: breakpoint.lg ? 1 : 0.5,
@@ -117,8 +113,8 @@ function fitModel() {
     ? app.renderer.screen.height
     : model.height;
 
-  model.anchor.set(anchor.x, anchor.y);
-  model.scale.set(scale.x, scale.y);
+  model.anchor.set(0.5, 1.0);
+  model.scale.set(0.2, 0.2);
   model.x = width;
   model.y = height;
 }
