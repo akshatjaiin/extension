@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Interactive Waifu</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="static/media/settings-icon.png">
+
+    <!-- External stylesheets and fonts (optional) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Chat UI Container -->
+    <div id="page">
+        <div id="top-section" style="display: flex;">
+            <!-- Live2D Waifu Canvas (Left) -->
+            <div id="waifu-container">
+                <canvas id=canvas style="height: 500px; width:200px"></canvas>
+            </div>
+
+            <!-- Chat History (Right) -->
+            <div id="chat-history">
+                <h2>Chat with Waifu</h2>
+                <div class="chat-box" id="chatBox">
+                    <!-- Chat messages will appear here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Input Section (Below Waifu and Chat History) -->
+        <div id="chat-input-section">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Type a message...">
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script> 
+    <script src="http://cdn.jsdelivr.net/gh/dylanNew/live2d/webgl/Live2D/lib/live2d.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.2.1/pixi.min.js"></script>
+    <script src="https://github.com/guansss/pixi-live2d-display/releases/download/v0.2.1/browser.js"></script>
+
+    <script src="main.js"></script>
+
+
+ 
+</body>
+</html>
