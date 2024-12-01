@@ -95,7 +95,7 @@ function fitModel() {
   if (!breakpoint.md && !breakpoint.lg) {
     app.renderer.screen.width = window.innerWidth;
   }
-  app.renderer.screen.height = window.innerHeight;
+  app.renderer.screen.width = window.innerWidth / 2;
 
   const anchor = {
     x: breakpoint.lg ? 1 : 0.5,
@@ -125,24 +125,30 @@ function fitModel() {
 
 window.addEventListener('resize', fitModel);
 const sayMessage = async (message) => {
-  const speechSynthesis = window.speechSynthesis;
   const voiceSession = new SpeechSynthesisUtterance(message);
-  console.log(speechSynthesis.getVoices())
   voiceSession.voice = speechSynthesis.getVoices()[0];
   if (voiceSession.voice == undefined) throw Error("Cant start Voice session required voice unavilable")
   voiceSession.pitch = 1;
   voiceSession.rate = 1;
-  speechSynthesis.speak(message);
-  const delay = Math.random() * 1e3 + 250;
 
   const motionGroup = 'talk'
   const random = Math.round(Math.random() * (motions[motionGroup].length - 1));
   const motion = motions[motionGroup][random];
-
+  voiceSession.onstart = () => {
+  }
+  const delay = Math.random() * 1e2 + 250;
+  speechSynthesis.speak(voiceSession);
   setTimeout(() => {
-    // alert( answer || "Sorry, I don't speak that language");
     model.motion(motion[0], motion[1]);
   }, delay);
-}
-sayMessage("Hello")
 
+}
+let isVoiceLoaded = false;
+window.speechSynthesis.onvoiceschanged = () => { isVoiceLoaded = true; }
+
+document.getElementById("ai_prompt").addEventListener("keypress", (event) => {
+  if (event.key !== "Enter") return;
+  console.log(isVoiceLoaded)
+  if (!isVoiceLoaded) alert("Voice is not loaded yet")
+  sayMessage(event.target.value)
+})
