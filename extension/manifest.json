@@ -5,7 +5,7 @@
   "description": "A Ai wifu",
   "permissions": [],
   "icons": {
-    "48": "icon.png"
+    "48": "logo.png"
   },
   "action": {
     "default_popup": "index.html",
