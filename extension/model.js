@@ -59,6 +59,7 @@ PIXI.live2d.Live2DModel.fromModelSettingsFile(Model_url).then(model => {
   // the update loop of the model where we have to update all those stuff
   model.internal.motionManager.update = () => {
     updateFn.call(model.internal.motionManager);
+    if (!isSpeaking) return;
     console.log("Words")
     // Overwrite the parameter after calling the original update function
     model.internal.coreModel.setParamFloat('PARAM_MOUTH_OPEN_Y', mouthValue);

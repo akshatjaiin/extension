@@ -1,3 +1,7 @@
+body{
+  min-width:360px;
+
+}
 .chat-box{
   padding:1rem;
   display:flex;
@@ -18,4 +22,32 @@
   &>button:hover{
     background:#4731e3;
   }
+}
+.nav-bar{
+  position: absolute;
+  top:0px;
+  height:2rem;
+  width:100vw;
+  display:flex;
+  color:#fff;
+font-weight:bold;
+font-size:1.2rem;
+padding:1rem;
+}
+#history-btn{
+  cursor: pointer;
+}
+#hisory-tab{
+  position:absolute;
+  top:0px;
+  left:0px;
+  height:100vh;
+  background:white;
+  width:50vw;
+  max-width:400px;
+  min-width:250px;
+  transition:all 250ms ease-in-out;
+}
+.chat-hidden{
+  transform:translateX(-100%)
 }
