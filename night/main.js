@@ -37,7 +37,7 @@ async function sendMessage(userMessage) {
     setTimeout(() => {
       displayAIResponse(aiResponse);
       speakAndAnimate(aiResponse); // Add AI voice output and animate mouth
-    }, 500); // Delay for 500ms before displaying AI response
+    }); // Delay for 500ms before displaying AI response
 
     scrollToBottom();  // Scroll chat history to the bottom after a new message is added
   } catch (error) {
@@ -149,6 +149,7 @@ let mouthValue = 0;
 let isSpeaking = false;
 
 app.ticker.add(() => {
+  
   // Simulate the mouth opening based on speech
   if (isSpeaking) {
     // Mouth is open during speaking
@@ -176,7 +177,6 @@ PIXI.live2d.Live2DModel.fromModelSettingsFile(url).then(model => {
 
     // Overwrite the parameter after calling the original update function
     model.internal.coreModel.setParamFloat('PARAM_MOUTH_OPEN_Y', mouthValue);
-    model.internal.coreModel.setParamFloat('PARAM_MOUTH_OPEN_X', 1);
   };
 });
 
@@ -185,7 +185,7 @@ function speakAndAnimate(text) {
   const speechSynthesis = window.speechSynthesis;
   const aiVoice = new SpeechSynthesisUtterance(text);
   aiVoice.voice = speechSynthesis.getVoices()[0]; // Use default voice
-  aiVoice.rate = 1;  // Normal speech rate
+  aiVoice.rate = 1.5;  // Normal speech rate
 
   // Event listener for when speech starts
   aiVoice.onstart = () => {
