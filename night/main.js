@@ -1,4 +1,5 @@
 let session; // Session to interact with the AI
+const model_bg = './anime-scenery.jpg';
 
 // Initialize chat session with a system prompt
 async function initChat() {
@@ -142,7 +143,7 @@ const url = 'https://raw.githubusercontent.com/guansss/pixi-live2d-display/maste
 const app = new PIXI.Application({
   view: document.getElementById('canvas'),
   autoStart: true,
-  resizeTo: window
+  // resizeTo: window
 });
 
 let mouthValue = 0;
@@ -160,21 +161,32 @@ app.ticker.add(() => {
   }
 });
 
+
 PIXI.live2d.Live2DModel.fromModelSettingsFile(url).then(model => {
+
+  const backgroundContainer = new PIXI.Container();
+  backgroundContainer.position.set(0, 0)
+  backgroundContainer.scale.set(1, 1.2)
+  app.stage.addChild(backgroundContainer);
   app.stage.addChild(model);
 
-  model.anchor.set(0.5, 0.5);
-  model.position.set(innerWidth / 2, innerHeight / 2);
+  const backgroundImage = PIXI.Texture.from(model_bg);
+  const backgroundSprite = new PIXI.Sprite(backgroundImage);
+  backgroundContainer.addChild(backgroundSprite);
 
-  const size = Math.min(innerWidth, innerHeight) * 0.8;
-  model.width = size;
-  model.height = size;
+  model.anchor.set(1.0, 0.7);
+  model.position.set(window.innerWidth / 2, window.innerHeight / 2);
+
+  // const size = Math.min(window.innerWidth, window.innerHeight) * 0.5;
+  model.scale.set(0.4, 0.4)
+  // model.width = size;
+  // model.height = size;
 
   const updateFn = model.internal.motionManager.update;
 
   model.internal.motionManager.update = () => {
     updateFn.call(model.internal.motionManager);
-
+    console.log(mouthValue)
     // Overwrite the parameter after calling the original update function
     model.internal.coreModel.setParamFloat('PARAM_MOUTH_OPEN_Y', mouthValue);
   };
