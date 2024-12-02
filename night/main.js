@@ -156,7 +156,7 @@ app.ticker.add(() => {
     mouthValue = Math.sin(performance.now() / 200) / 2 + 0.5;
   } else {
     // Mouth is closed when not speaking
-    mouthValue = 0    ;
+    mouthValue = 0;
   }
 });
 

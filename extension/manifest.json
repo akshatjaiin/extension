@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Ai wifu",
+  "version": "1.0",
+  "description": "A Ai wifu",
+  "permissions": [],
+  "icons": {
+    "48": "icon.png"
+  },
+  "action": {
+    "default_popup": "index.html",
+    "default_icon": "logo.png"
+  },
+  "side_panel": {
+    "default_path": "index.html"
+  }
+}

@@ -1,0 +1,21 @@
+.chat-box{
+  padding:1rem;
+  display:flex;
+  justify-content:center;
+  gap:1rem;
+  background:rgb(20 20 24);
+  input{
+    outline:none;
+  }
+  &>button{
+    height:2rem;
+    width:2rem;
+    padding:5px;
+    background:#2912cc;
+    border:none;
+    cursor: pointer;
+  }
+  &>button:hover{
+    background:#4731e3;
+  }
+}
