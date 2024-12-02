@@ -22,8 +22,8 @@ const model = await Live2DModel.from('/hiyori_free_en/runtime/hiyori_free_t08.mo
 });
 
 app.stage.addChild(model);
-
 let mousestate = false;
+model.motion("Idle", 1)
 // if u point u r mouse down
 canvas.addEventListener('pointerdown', (event) => model.tap(event.clientX, event.clientY));
 
@@ -44,39 +44,19 @@ canvas.addEventListener('pointermove', ({ clientX, clientY }) => {
 // on hiting the model
 model.on('hit', (hitAreas) => {
   // if its head it will shake it
-  if (hitAreas.includes('head')) model.motion('shake', 1);
+  if (hitAreas.includes('head')) model.motion('Tap', 1);
   // if it heat to body it will shy
-  if (hitAreas.includes('body')) model.motion('tap_body', 1);
+  if (hitAreas.includes('body')) model.motion('Tap@Body', 1);
 });
-
 // some actions
 const motions = {
   talk: [
-    ['tap_body', 0],
-    ['tap_body', 2],
-    ['pinch_out', 0],
-    ['flick_head', 1],
-    ['flick_head', 2],
+    ['FlickDown', 1],
+    ['Tap@Body', 1],
+    ['Flick', 1],
+    ['Tap', 1],
+    ['Flick@Body', 1],
   ],
-  cheer: [
-    ['tap_body', 1]
-  ],
-  mouthcover: [
-    ['pinch_in', 0],
-    ['pinch_in', 1],
-    ['pinch_in', 2],
-  ],
-  disagree: [
-    ['pinch_out', 1],
-    ['pinch_out', 2],
-  ],
-  surprised: [
-    ['shake', 0],
-    ['shake', 2],
-  ],
-  laugh: [
-    ['shake', 1],
-  ]
 }
 // make the model fit to screen
 fitModel();
@@ -85,7 +65,7 @@ setTimeout(() => fitModel(), 250);
 function fitModel() {
   const breakpoint = {
     md: window.innerWidth > 720 && window.innerWidth < 1000,
-    lg: window.innerWidth >= 1000
+    lg: window.innerWidth >= 1001
   };
 
   canvas.width = window.innerWidth / 2;
@@ -135,8 +115,8 @@ const sayMessage = async (message) => {
   const delay = Math.random() * 1e2 + 250;
   speechSynthesis.speak(voiceSession);
   setTimeout(() => {
-    model.motion(motion[0], motion[1]);
-  }, delay);
+    model.motion("FlickDown", 1);
+  }, 20);
 
 }
 let isVoiceLoaded = false;
